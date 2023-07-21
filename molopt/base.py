@@ -203,6 +203,8 @@ class BaseOptimizer:
         self.max_oracle_calls = max_oracle_calls 
         self.freq_log = freq_log 
         self.output_dir = output_dir
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         self.log_results = log_results 
         self.oracle = Oracle(max_oracle_calls = max_oracle_calls, freq_log = freq_log, output_dir = output_dir)
         if self.smi_file is not None:
