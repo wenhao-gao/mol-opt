@@ -1,4 +1,4 @@
-# mol-opt: a toolbox for molecular design
+# mol-opt: a Python Toolbox for Molecular Design
 
 ## 🚀 Installation 
 To install the necessary dependencies, run the following commands:

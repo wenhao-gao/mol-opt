@@ -1,0 +1,6 @@
+include molopt/graph_mcts/p1.p
+include molopt/graph_mcts/rs_make_ring.p
+include molopt/graph_mcts/p_ring.p
+include molopt/graph_mcts/rs_ring.p
+include molopt/graph_mcts/r_s1.p
+include molopt/graph_mcts/size_stats.p

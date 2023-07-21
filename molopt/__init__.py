@@ -10,4 +10,4 @@ from .stoned import Stoned
 # from .reinvent_selfies import REINVENT_SELFIES   
 # from .jt_vae import JTVAE     
 # from .smiles_vae import SmilesVAE    
-# from .graph_mcts import Graph_MCTS    
+from .graph_mcts import Graph_MCTS    
