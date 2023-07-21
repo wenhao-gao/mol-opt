@@ -14,7 +14,19 @@
 # optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/smiles_ga/hparams_default.yaml', patience=5, seed=0)
 
 
-from molopt import SelfiesGA
-optimizer = SelfiesGA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
-optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/selfies_ga/hparams_default.yaml', patience=5, seed=0)
+# from molopt import SelfiesGA
+# optimizer = SelfiesGA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/selfies_ga/hparams_default.yaml', patience=5, seed=0)
+
+from molopt import Stoned
+optimizer = Stoned(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/stoned/hparams_default.yaml', patience=5, seed=0)
+
+
+
+
+# from molopt import GPBO
+# optimizer = GPBO(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/gpbo/hparams_default.yaml', patience=5, seed=0)
+
 
