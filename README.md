@@ -9,7 +9,11 @@ python setup.py install
 
 ## 💻 Usage
 
-
+```python
+from mol-opt import JTVAE
+optimizer = JTVAE(xxx, xxx) 
+results = optimizer.opt(oracle = xxx, num_oracle=1000, xxx, xxx, xxx)
+```
 
 ## 🤝 Contributing
 If you wish to contribute, please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file. We welcome pull requests for bug fixes, feature requests, and improvements to our code.
