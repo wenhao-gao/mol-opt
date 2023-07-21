@@ -49,14 +49,13 @@ def reproduce(mating_pool, mutation_rate):
 
 class GraphGA(BaseOptimizer):
 
-    def __init__(self, args=None):
-        super().__init__(args)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.model_name = "graph_ga"
 
     def _optimize(self, oracle, config):
 
         self.oracle.assign_evaluator(oracle)
-
         pool = joblib.Parallel(n_jobs=self.n_jobs)
         
         if self.smi_file is not None:
@@ -98,15 +97,6 @@ class GraphGA(BaseOptimizer):
             population_mol = [t[1] for t in population_tuples]
             population_scores = [t[0] for t in population_tuples]
 
-            # # early stopping
-            # if population_scores == old_scores:
-            #     patience += 1
-            #     if patience >= self.args.patience:
-            #         self.log_intermediate(finish=True)
-            #         break
-            # else:
-            #     patience = 0
-
             ### early stopping
             if len(self.oracle) > 100:
                 self.sort_buffer()
@@ -114,7 +104,7 @@ class GraphGA(BaseOptimizer):
                 # import ipdb; ipdb.set_trace()
                 if (new_score - old_score) < 1e-3:
                     patience += 1
-                    if patience >= self.args.patience:
+                    if patience >= self.patience:
                         self.log_intermediate(finish=True)
                         print('convergence criteria met, abort ...... ')
                         break

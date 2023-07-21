@@ -49,17 +49,15 @@ def top_auc(buffer, top_n, finish, freq_log, max_oracle_calls):
 
 
 class Oracle:
-    def __init__(self, args=None, mol_buffer={}):
+    def __init__(self, max_oracle_calls=10000, freq_log=100, output_dir='results', mol_buffer={}):
         self.name = None
         self.evaluator = None
         self.task_label = None
-        if args is None:
-            self.max_oracle_calls = 10000
-            self.freq_log = 100
-        else:
-            self.args = args
-            self.max_oracle_calls = args.max_oracle_calls
-            self.freq_log = args.freq_log
+
+        self.max_oracle_calls = max_oracle_calls 
+        self.freq_log = freq_log 
+        self.output_dir = output_dir 
+
         self.mol_buffer = mol_buffer
         self.sa_scorer = tdc.Oracle(name = 'SA')
         self.diversity_evaluator = tdc.Evaluator(name = 'Diversity')
@@ -78,9 +76,9 @@ class Oracle:
     def save_result(self, suffix=None):
         
         if suffix is None:
-            output_file_path = os.path.join(self.args.output_dir, 'results.yaml')
+            output_file_path = os.path.join(self.output_dir, 'results.yaml')
         else:
-            output_file_path = os.path.join(self.args.output_dir, 'results_' + suffix + '.yaml')
+            output_file_path = os.path.join(self.output_dir, 'results_' + suffix + '.yaml')
 
         self.sort_buffer()
         with open(output_file_path, 'w') as f:
@@ -128,7 +126,7 @@ class Oracle:
                 f'avg_sa: {avg_sa:.3f} | '
                 f'div: {diversity_top100:.3f}')
 
-        wandb.log({
+        result_dict = {
             "avg_top1": avg_top1, 
             "avg_top10": avg_top10, 
             "avg_top100": avg_top100, 
@@ -138,9 +136,7 @@ class Oracle:
             "avg_sa": avg_sa,
             "diversity_top100": diversity_top100,
             "n_oracle": n_calls,
-            # "best_mol": wandb.Image(Draw.MolsToGridImage([Chem.MolFromSmiles(item[0]) for item in temp_top10], 
-            #           molsPerRow=5, subImgSize=(200,200), legends=[f"f = {item[1][0]:.3f}, #oracle = {item[1][1]}" for item in temp_top10]))
-        })
+        }
 
 
     def __len__(self):
@@ -200,13 +196,16 @@ class Oracle:
 
 class BaseOptimizer:
 
-    def __init__(self, args=None):
+    def __init__(self, smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True):
         self.model_name = "Default"
-        self.args = args
-        self.n_jobs = args.n_jobs
+        self.n_jobs = n_jobs
         # self.pool = joblib.Parallel(n_jobs=self.n_jobs)
-        self.smi_file = args.smi_file
-        self.oracle = Oracle(args=self.args)
+        self.smi_file = smi_file
+        self.max_oracle_calls = max_oracle_calls 
+        self.freq_log = freq_log 
+        self.output_dir = output_dir
+        self.log_results = log_results 
+        self.oracle = Oracle(max_oracle_calls = max_oracle_calls, freq_log = freq_log, output_dir = output_dir)
         if self.smi_file is not None:
             self.all_smiles = self.load_smiles_from_file(self.smi_file)
         else:
@@ -274,9 +273,9 @@ class BaseOptimizer:
         print(f"Saving molecules...")
         
         if suffix is None:
-            output_file_path = os.path.join(self.args.output_dir, 'results.yaml')
+            output_file_path = os.path.join(self.output_dir, 'results.yaml')
         else:
-            output_file_path = os.path.join(self.args.output_dir, 'results_' + suffix + '.yaml')
+            output_file_path = os.path.join(self.output_dir, 'results_' + suffix + '.yaml')
 
         self.sort_buffer()
         with open(output_file_path, 'w') as f:
@@ -302,7 +301,10 @@ class BaseOptimizer:
 
     def reset(self):
         del self.oracle
-        self.oracle = Oracle(args=self.args)
+        self.oracle = Oracle(max_oracle_calls=self.max_oracle_calls, 
+                             freq_log=self.freq_log, 
+                             output_dir = self.output_dir,)
+
 
     @property
     def mol_buffer(self):
@@ -340,8 +342,10 @@ class BaseOptimizer:
         # wandb.agent(sweep_id, function=_func, count=count, project=self.model_name + "_" + oracle.name)
         wandb.agent(sweep_id, function=_func, count=count, entity="mol_opt")
         
-    def optimize(self, oracle, config, seed=0, project="test"):
+    def optimize(self, oracle, config, patience=5, seed=0, project="test"):
         oracle = tdc.Oracle(oracle)
+        config = yaml.safe_load(open(config))
+        self.patience = patience 
         run = wandb.init(project=project, config=config, reinit=True, entity="mol_opt")
         wandb.run.name = self.model_name + "_" + oracle.name + "_" + wandb.run.id
         np.random.seed(seed)
@@ -350,7 +354,7 @@ class BaseOptimizer:
         self.seed = seed 
         self.oracle.task_label = self.model_name + "_" + oracle.name + "_" + str(seed)
         self._optimize(oracle, config)
-        if self.args.log_results:
+        if self.log_results:
             self.log_result()
         self.save_result(self.model_name + "_" + oracle.name + "_" + str(seed))
         # self.reset()
