@@ -23,10 +23,20 @@
 # optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/stoned/hparams_default.yaml', patience=5, seed=0)
 
 
-from molopt import Graph_MCTS
-optimizer = Graph_MCTS(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
-optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/graph_mcts/hparams_default.yaml', patience=5, seed=0)
+# from molopt import Graph_MCTS
+# optimizer = Graph_MCTS(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/graph_mcts/hparams_default.yaml', patience=5, seed=0)
 
+
+from molopt import MIMOSA
+optimizer = MIMOSA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/mimosa/hparams_default.yaml', patience=5, seed=0)
+
+
+
+# from molopt import MolDQN
+# optimizer = MolDQN(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/moldqn/hparams_default.yaml', patience=5, seed=0)
 
 
 

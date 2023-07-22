@@ -29,7 +29,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     package_data={'molopt': ['graph_mcts/p1.p', 'graph_mcts/rs_make_ring.p', 'graph_mcts/p_ring.p', 
-                            'graph_mcts/rs_ring.p', 'graph_mcts/r_s1.p', 'graph_mcts/size_stats.p']},
+                            'graph_mcts/rs_ring.p', 'graph_mcts/r_s1.p', 'graph_mcts/size_stats.p',
+                            'mimosa/data/substructure.txt', 'mimosa/data/vocabulary.txt', 
+                            'mimosa/pretrained_model/GNN.ckpt', ]},
 )
 
 

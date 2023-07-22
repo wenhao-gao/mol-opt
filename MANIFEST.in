@@ -4,3 +4,6 @@ include molopt/graph_mcts/p_ring.p
 include molopt/graph_mcts/rs_ring.p
 include molopt/graph_mcts/r_s1.p
 include molopt/graph_mcts/size_stats.p
+include molopt/mimosa/data/substructure.txt
+include molopt/mimosa/data/vocabulary.txt
+include molopt/mimosa/pretrained_model/GNN.ckpt
