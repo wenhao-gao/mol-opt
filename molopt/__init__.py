@@ -6,7 +6,7 @@ from .stoned import Stoned
 # from .gpbo import GPBO    
 from .mimosa import MIMOSA
 # from .moldqn import MolDQN
-# from .reinvent import REINVENT 
+from .reinvent import REINVENT 
 # from .reinvent_selfies import REINVENT_SELFIES   
 # from .jt_vae import JTVAE     
 # from .smiles_vae import SmilesVAE    

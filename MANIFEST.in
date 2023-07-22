@@ -7,3 +7,5 @@ include molopt/graph_mcts/size_stats.p
 include molopt/mimosa/data/substructure.txt
 include molopt/mimosa/data/vocabulary.txt
 include molopt/mimosa/pretrained_model/GNN.ckpt
+include molopt/reinvent/data/Voc
+include molopt/reinvent/data/Prior.ckpt
