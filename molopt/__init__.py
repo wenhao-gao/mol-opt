@@ -7,7 +7,7 @@ from .stoned import Stoned
 from .mimosa import MIMOSA
 # from .moldqn import MolDQN
 from .reinvent import REINVENT 
-# from .reinvent_selfies import REINVENT_SELFIES   
+from .reinvent_selfies import REINVENT_SELFIES   
 # from .jt_vae import JTVAE     
 # from .smiles_vae import SmilesVAE    
 from .graph_mcts import Graph_MCTS    

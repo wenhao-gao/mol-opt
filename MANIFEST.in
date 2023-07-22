@@ -9,3 +9,5 @@ include molopt/mimosa/data/vocabulary.txt
 include molopt/mimosa/pretrained_model/GNN.ckpt
 include molopt/reinvent/data/Voc
 include molopt/reinvent/data/Prior.ckpt
+include molopt/reinvent_selfies/data/Voc
+include molopt/reinvent_selfies/data/Prior.ckpt
