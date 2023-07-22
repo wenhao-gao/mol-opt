@@ -11,3 +11,8 @@ include molopt/reinvent/data/Voc
 include molopt/reinvent/data/Prior.ckpt
 include molopt/reinvent_selfies/data/Voc
 include molopt/reinvent_selfies/data/Prior.ckpt
+include molopt/smiles_vae/checkpoint/smiles_vae_model_080.pt 
+include molopt/smiles_vae/checkpoint/smiles_vae_config.pt 
+include molopt/smiles_vae/checkpoint/smiles_vae_vocab.txt 
+include molopt/jt_vae/data/zinc/vocab.txt
+include molopt/jt_vae/fast_molvae/vae_model/model.iter-25000

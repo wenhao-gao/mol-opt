@@ -38,15 +38,29 @@
 # optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/reinvent/hparams_default.yaml', patience=5, seed=0)
 
 
-from molopt import REINVENT_SELFIES
-optimizer = REINVENT_SELFIES(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
-optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/reinvent_selfies/hparams_default.yaml', patience=5, seed=0)
+# from molopt import REINVENT_SELFIES
+# optimizer = REINVENT_SELFIES(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/reinvent_selfies/hparams_default.yaml', patience=5, seed=0)
 
 
 
-# from molopt import MolDQN
-# optimizer = MolDQN(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
-# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/moldqn/hparams_default.yaml', patience=5, seed=0)
+# ### need cuda 
+# from molopt import JTVAE
+# optimizer = JTVAE(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/jt_vae/hparams_default.yaml', patience=5, seed=0)
+
+
+
+
+# from molopt import SmilesVAE
+# optimizer = SmilesVAE(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+# optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/smiles_vae/hparams_default.yaml', patience=5, seed=0)
+
+
+
+from molopt import MolDQN
+optimizer = MolDQN(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+optimizer.optimize(oracle='qed', config='/Users/tianfanfu/Downloads/mol-opt/molopt/moldqn/hparams_default.yaml', patience=5, seed=0)
 
 
 

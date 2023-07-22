@@ -33,7 +33,12 @@ setuptools.setup(
                             'mimosa/data/substructure.txt', 'mimosa/data/vocabulary.txt', 
                             'mimosa/pretrained_model/GNN.ckpt', 
                             'reinvent/data/Voc', 'reinvent/data/Prior.ckpt', 
-                            'reinvent_selfies/data/Voc', 'reinvent_selfies/data/Prior.ckpt']},
+                            'reinvent_selfies/data/Voc', 'reinvent_selfies/data/Prior.ckpt', 
+                            'smiles_vae/checkpoint/smiles_vae_model_080.pt', 
+                            'smiles_vae/checkpoint/smiles_vae_config.pt', 
+                            'smiles_vae/checkpoint/smiles_vae_vocab.txt', 
+                            'jt_vae/data/zinc/vocab.txt', 
+                            'jt_vae/fast_molvae/vae_model/model.iter-25000', ]},
 )
 
 
