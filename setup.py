@@ -32,7 +32,7 @@ setuptools.setup(
                             'graph_mcts/rs_ring.p', 'graph_mcts/r_s1.p', 'graph_mcts/size_stats.p',
                             'mimosa/data/substructure.txt', 'mimosa/data/vocabulary.txt', 
                             'mimosa/pretrained_model/GNN.ckpt', 
-                            'reinvent/data/Voc', 'reinvent/data/Prior.ckpt', 
+                            'reinvent/data/Voc', 
                             'reinvent_selfies/data/Voc', 'reinvent_selfies/data/Prior.ckpt', 
                             'smiles_vae/checkpoint/smiles_vae_model_080.pt', 
                             'smiles_vae/checkpoint/smiles_vae_config.pt', 

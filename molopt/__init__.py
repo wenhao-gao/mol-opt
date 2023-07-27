@@ -10,5 +10,5 @@ from .graph_mcts import Graph_MCTS
 from .moldqn import MolDQN
 from .gpbo import GPBO    
 from .jt_vae import JTVAE     
-# from .smiles_vae import SmilesVAE    
+from .smiles_vae import SmilesVAE    
 # from .selfies_vae import SelfiesVAE    
