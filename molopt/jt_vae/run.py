@@ -18,6 +18,8 @@ from botorch.fit import fit_gpytorch_model
 from gpytorch.mlls import ExactMarginalLogLikelihood
 from botorch.acquisition import UpperConfidenceBound
 from botorch.optim import optimize_acqf
+import requests
+from tqdm import tqdm 
 
 
 class JTVAE(BaseOptimizer):
@@ -34,7 +36,25 @@ class JTVAE(BaseOptimizer):
 
         path_here = os.path.dirname(os.path.realpath(__file__))
         vocab_path = os.path.join(path_here, 'data/zinc/vocab.txt')
-        model_path = os.path.join(path_here, 'fast_molvae/vae_model/model.iter-25000')
+        model_path = 'jtvae.ckpt'
+
+
+        if not os.path.exists(model_path):
+            #### download pretrained model 
+            url = "https://github.com/wenhao-gao/mol_opt/raw/main/main/jt_vae/fast_molvae/vae_model/model.iter-25000"
+            response = requests.get(url, stream=True)
+            total_size_in_bytes = int(response.headers.get("content-length", 0))
+            block_size = 1024
+            progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True)
+            save_path = model_path
+            with open(save_path, "wb") as file:
+                for data in response.iter_content(block_size):
+                    progress_bar.update(len(data))
+                    file.write(data)
+            progress_bar.close()
+
+
+
 
         vocab = [x.strip("\r\n ") for x in open(vocab_path)] 
         vocab = Vocab(vocab)

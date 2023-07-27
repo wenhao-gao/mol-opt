@@ -37,8 +37,7 @@ setuptools.setup(
                             'smiles_vae/checkpoint/smiles_vae_model_080.pt', 
                             'smiles_vae/checkpoint/smiles_vae_config.pt', 
                             'smiles_vae/checkpoint/smiles_vae_vocab.txt', 
-                            'jt_vae/data/zinc/vocab.txt', 
-                            'jt_vae/fast_molvae/vae_model/model.iter-25000', ]},
+                            'jt_vae/data/zinc/vocab.txt',  ]},
 )
 
 
