@@ -9,7 +9,8 @@ from .utils import Variable, seq_to_smiles, fraction_valid_smiles, unique, seq_t
 from .model import RNN
 from .data_structs import Vocabulary, Experience
 import torch
-
+import requests 
+from tqdm import tqdm 
 from tdc.chem_utils import MolConvert
 selfies2smiles = MolConvert(src = 'SELFIES', dst = 'SMILES')
 smiles2selfies = MolConvert(src = 'SMILES', dst = 'SELFIES')
@@ -25,8 +26,22 @@ class REINVENT_SELFIES(BaseOptimizer):
 
         self.oracle.assign_evaluator(oracle)
 
+        #### download pretrained model 
+        restore_prior_from=os.path.join('reinvent_selfies.ckpt')
+        if not os.path.exists(restore_prior_from):
+            url = "https://github.com/wenhao-gao/mol_opt/raw/main/main/reinvent_selfies/data/Prior.ckpt"
+            response = requests.get(url, stream=True)
+            total_size_in_bytes = int(response.headers.get("content-length", 0))
+            block_size = 1024
+            progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True)
+            save_path = "reinvent_selfies.ckpt"
+            with open(save_path, "wb") as file:
+                for data in response.iter_content(block_size):
+                    progress_bar.update(len(data))
+                    file.write(data)
+            progress_bar.close()
+
         path_here = os.path.dirname(os.path.realpath(__file__))
-        restore_prior_from=os.path.join(path_here, 'data/Prior.ckpt')
         restore_agent_from=restore_prior_from 
         voc = Vocabulary(init_from_file=os.path.join(path_here, "data/Voc"))
 

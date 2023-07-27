@@ -33,7 +33,7 @@ setuptools.setup(
                             'mimosa/data/substructure.txt', 'mimosa/data/vocabulary.txt', 
                             'mimosa/pretrained_model/GNN.ckpt', 
                             'reinvent/data/Voc', 
-                            'reinvent_selfies/data/Voc', 'reinvent_selfies/data/Prior.ckpt', 
+                            'reinvent_selfies/data/Voc',  
                             'smiles_vae/checkpoint/smiles_vae_model_080.pt', 
                             'smiles_vae/checkpoint/smiles_vae_config.pt', 
                             'smiles_vae/checkpoint/smiles_vae_vocab.txt', 
