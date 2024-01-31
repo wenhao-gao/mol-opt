@@ -1,3 +1,7 @@
+name = 'mol-opt'
+version = '0.0.1'
+
+
 from .graph_ga import GraphGA
 from .screening import Screening
 from .smiles_ga import SmilesGA 
