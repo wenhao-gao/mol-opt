@@ -308,7 +308,10 @@ class BaseOptimizer:
         raise NotImplementedError
 
     def optimize(self, oracle, config, patience=5, seed=0, project="test"):
-        oracle = tdc.Oracle(oracle)
+        if type(oracle)==str:
+            oracle = tdc.Oracle(oracle)
+        # assert type(oracle) == tdc.Oracle
+        assert callable(oracle) 
         config = yaml.safe_load(open(config))
         self.patience = patience 
         run_name = self.model_name + "_" + oracle.name 
