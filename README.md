@@ -1,7 +1,7 @@
 # mol-opt: a Python Toolbox for Molecular Design
 
 ## 🚀 Installation 
-To install the necessary dependencies, run the following commands:
+To install the necessary dependencies, we require python 3.8, and run the following commands:
 
 ```
 python setup.py install 
