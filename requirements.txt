@@ -48,7 +48,6 @@ six==1.16.0
 sympy==1.12
 tensorboardx==2.6.2.2
 threadpoolctl==3.3.0
-torch==2.2.0
 tqdm==4.66.2
 typing-extensions==4.9.0
 tzdata==2024.1

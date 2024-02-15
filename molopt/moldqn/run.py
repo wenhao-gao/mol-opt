@@ -2,10 +2,10 @@ import os, torch
 import numpy as np 
 import sys
 path_here = os.path.dirname(os.path.realpath(__file__))
-# sys.path.append(path_here)
+sys.path.append(path_here)
 # sys.path.append('.')
-from ..base import BaseOptimizer
-from .agents.agent import DQN 
+from molopt.base import BaseOptimizer
+from molopt.moldqn.agents.agent import DQN 
 
 class MolDQN(BaseOptimizer):
 
