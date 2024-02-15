@@ -6,7 +6,7 @@
 To get started with our package, please first ensure that PyTorch is installed with a CUDA version compatible with your device. You can find detailed installation instructions on [the official PyTorch website](https://pytorch.org/get-started/locally/).
 Once PyTorch is set up, you can install the remaining dependencies for our package by executing:
 ```
-python setup.py install 
+pip install .
 ```
 Please note, our package has been tested and confirmed to work with Python 3.8. We recommend using this version to ensure compatibility and optimal performance.
 
