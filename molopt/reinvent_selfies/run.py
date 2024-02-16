@@ -36,21 +36,20 @@ class REINVENT_SELFIES(BaseOptimizer):
         self.oracle.assign_evaluator(oracle)
 
         #### download pretrained model 
-        restore_prior_from=os.path.join('reinvent_selfies.ckpt')
+        path_here = os.path.dirname(os.path.realpath(__file__))
+        restore_prior_from=os.path.join(path_here, 'data/reinvent_selfies.ckpt')
         if not os.path.exists(restore_prior_from):
             url = "https://github.com/wenhao-gao/mol_opt/raw/main/main/reinvent_selfies/data/Prior.ckpt"
             response = requests.get(url, stream=True)
             total_size_in_bytes = int(response.headers.get("content-length", 0))
             block_size = 1024
             progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True)
-            save_path = "reinvent_selfies.ckpt"
-            with open(save_path, "wb") as file:
+            with open(restore_prior_from, "wb") as file:
                 for data in response.iter_content(block_size):
                     progress_bar.update(len(data))
                     file.write(data)
             progress_bar.close()
 
-        path_here = os.path.dirname(os.path.realpath(__file__))
         restore_agent_from=restore_prior_from 
         voc = Vocabulary(init_from_file=os.path.join(path_here, "data/Voc"))
 
@@ -61,10 +60,10 @@ class REINVENT_SELFIES(BaseOptimizer):
         # Saved models are partially on the GPU, but if we dont have cuda enabled we can remap these
         # to the CPU.
         if torch.cuda.is_available():
-            Prior.rnn.load_state_dict(torch.load(os.path.join(path_here,'data/Prior.ckpt')))
+            Prior.rnn.load_state_dict(torch.load(os.path.join(path_here,'data/reinvent_selfies.ckpt')))
             Agent.rnn.load_state_dict(torch.load(restore_agent_from))
         else:
-            Prior.rnn.load_state_dict(torch.load(os.path.join(path_here, 'data/Prior.ckpt'), map_location=lambda storage, loc: storage))
+            Prior.rnn.load_state_dict(torch.load(os.path.join(path_here, 'data/reinvent_selfies.ckpt'), map_location=lambda storage, loc: storage))
             Agent.rnn.load_state_dict(torch.load(restore_agent_from, map_location=lambda storage, loc: storage))
 
         # We dont need gradients with respect to Prior

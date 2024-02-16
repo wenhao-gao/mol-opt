@@ -8,7 +8,7 @@ from chemutils import smiles2graph
 #     return 1/(1+np.exp(-x))
 # device = 'cuda' if torch.cuda.is_available() else 'cpu'
 device = 'cpu'
-sigmoid = torch.nn.Sigmoid() 
+sigmoid = torch.nn.Sigmoid()
 
 class GCN(nn.Module):
     def __init__(self, nfeat, nhid, num_layer):

@@ -10,13 +10,22 @@ pip install .
 ```
 Please note, our package has been tested and confirmed to work with Python 3.8. We recommend using this version to ensure compatibility and optimal performance.
 
-## 💻 Usage
+## 💻 Usage (3 lines of code)
 
 ```python
 from molopt.graph_ga import GraphGA
 optimizer = GraphGA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
 optimizer.optimize(oracle='qed', config='path_to_your_hparams.yaml', patience=5, seed=0)
 ```
+
+Oracle can be a `string` (e.g., `qed`, `jnk3`, `gsk3b`) or a callable function (e.g., `qed=tdc.Oracle('qed')`). 
+
+We support three hyperparameter tune strategies:
+- default: e.g., `optimizer.optimize(oracle='qed', patience=5, seed=0)`. 
+- configuration file: e.g., for graph GA, `optimizer.optimize(oracle='qed', config='molopt/graph_ga/hparams_default.yaml', patience=5, seed=0)`. 
+- keyword update: e.g., for graph GA, `optimizer.optimize(oracle='qed', patience=5, seed=0, population_size=120)`. 
+
+
 You can follow [the format of yaml file](https://github.com/wenhao-gao/mol_opt/blob/main/main/graph_ga/hparams_default.yaml) to define the hyper-parameters.
 
 ## 🤝 Contributing

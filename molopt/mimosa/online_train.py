@@ -19,7 +19,7 @@ def train_gnn(data, gnn, epoch=5):
 
 	params = {'batch_size': 1,
 	          'shuffle': True,
-	          'num_workers': 1}
+	          'num_workers': 0}
 	def collate_fn(batch_lst):
 		return batch_lst
 	train_generator = torch.utils.data.DataLoader(training_set, collate_fn = collate_fn, **params)
