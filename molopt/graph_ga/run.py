@@ -54,7 +54,14 @@ class GraphGA(BaseOptimizer):
         self.model_name = "graph_ga"
 
     def _optimize(self, oracle, config):
-
+        #### set the default value 
+        if "population_size" not in config:
+            config["population_size"] = 120
+        if "offspring_size" not in config: 
+            config["offspring_size"] = 70
+        if "mutation_rate" not in config:
+            config['mutation_rate'] = 0.067  
+        
         self.oracle.assign_evaluator(oracle)
         pool = joblib.Parallel(n_jobs=self.n_jobs)
         

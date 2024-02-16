@@ -251,7 +251,18 @@ class Graph_MCTS(BaseOptimizer):
         self.model_name = "graph_mcts"
 
     def _optimize(self, oracle, config):
-        
+        #### set the default value 
+        if 'init_smiles' not in config:
+            config['init_smiles'] = 'CC'
+        if 'max_atoms' not in config:
+            config['max_atoms'] = 60
+        if 'max_children' not in config:
+            config['max_children']= 5
+        if 'num_sims' not in config:
+            config['num_sims'] = 22
+        if 'exploration_coefficient' not in config: 
+            config['exploration_coefficient'] = 4.3
+
         self.oracle.assign_evaluator(oracle)
 
         init_mol = Chem.MolFromSmiles(config["init_smiles"])

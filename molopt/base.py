@@ -307,12 +307,19 @@ class BaseOptimizer:
     def _optimize(self, oracle, config):
         raise NotImplementedError
 
-    def optimize(self, oracle, config, patience=5, seed=0, project="test"):
+    def optimize(self, oracle, config = None, patience=5, seed=0, project="test", **kwargs):
         if type(oracle)==str:
             oracle = tdc.Oracle(oracle)
         # assert type(oracle) == tdc.Oracle
         assert callable(oracle) 
-        config = yaml.safe_load(open(config))
+
+        if config is not None:
+            config = yaml.safe_load(open(config)) 
+        else: 
+            config = dict() 
+        for key, value in kwargs.items():
+            config[key] = value 
+
         self.patience = patience 
         run_name = self.model_name + "_" + oracle.name 
         np.random.seed(seed)

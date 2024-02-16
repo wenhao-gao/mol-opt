@@ -29,6 +29,25 @@ class JTVAE(BaseOptimizer):
         self.model_name = "jt_vae_bo"
 
     def _optimize(self, oracle, config):
+
+        #### set the default value 
+        if 'vocab_path' not in config:
+            config['vocab_path'] = 'main/jt_vae/data/zinc/vocab.txt'
+        if 'model_path' not in config:
+            config['model_path'] = 'main/jt_vae/fast_molvae/vae_model/model.iter-25000'
+        if 'hidden_size' not in config:
+            config['hidden_size'] = 450
+        if 'latent_size' not in config:
+            config['latent_size'] = 56
+        if 'depthT' not in config:
+            config['depthT'] = 20
+        if 'depthG' not in config:
+            config['depthG'] = 3
+        if 'train_num' not in config:
+            config['train_num'] = 100
+        if 'bo_batch' not in config:
+            config['bo_batch'] = 10 
+
         self.oracle.assign_evaluator(oracle)
 
         ## 0. load vae model 

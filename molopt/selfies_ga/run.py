@@ -21,6 +21,15 @@ class SelfiesGA(BaseOptimizer):
         self.model_name = "selfies_ga"
 
     def _optimize(self, oracle, config):
+        ## set default value 
+        if 'generation_size' not in config:
+            config['generation_size'] = 300
+        if 'patience' not in config:
+            config['patience'] = 5
+        if 'beta' not in config:
+            config['beta'] = 0
+        if 'max_generations' not in config:
+            config['max_generations'] = 1000
 
         self.oracle.assign_evaluator(oracle)
 

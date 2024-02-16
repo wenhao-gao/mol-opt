@@ -115,6 +115,13 @@ class SmilesGA(BaseOptimizer):
         self.model_name = "smiles_ga"
 
     def _optimize(self, oracle, config):
+        ## set default value 
+        if 'gene_size' not in config:
+            config['gene_size'] = 200
+        if 'population_size' not in config:
+            config['population_size'] = 50
+        if 'n_mutations' not in config:
+            config['n_mutations'] = 500
 
         self.oracle.assign_evaluator(oracle)
 

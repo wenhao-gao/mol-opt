@@ -86,6 +86,36 @@ class GPBO(BaseOptimizer):
         self.model_name = "gp_bo"
 
     def _optimize(self, oracle, config):
+        #### set the default value 
+        if "initial_population_size" not in config:
+            config['initial_population_size'] = 340 
+        if "n_train_gp_best" not in config: 
+            config['n_train_gp_best'] = 2200 
+        if "n_train_gp_rand" not in config:
+            config['n_train_gp_rand'] = 1350 
+        if "max_bo_iter" not in config:
+            config['max_bo_iter'] = 10000
+        if 'bo_batch_size' not in config: 
+            config['bo_batch_size']= 1180
+        if 'ga_max_generations' not in config: 
+            config['ga_max_generations'] = 60
+        if 'ga_offspring_size' not in config:
+            config['ga_offspring_size'] = 150
+        if 'ga_mutation_rate' not in config:
+            config['ga_mutation_rate'] = 0.01
+        if 'ga_population_size' not in config: 
+            config['ga_population_size'] = 820
+        if 'ga_pool_num_best' not in config:
+            config['ga_pool_num_best'] = 250
+        if 'ga_pool_num_carryover' not in config: 
+            config['ga_pool_num_carryover'] = 250
+        if 'max_ga_start_population_size' not in config:
+            config['max_ga_start_population_size'] = 1000
+        if 'fp_radius' not in config:
+            config['fp_radius'] = 2
+        if 'fp_nbits' not in config:
+            config['fp_nbits'] = 4096
+
         
         # Functions to do retraining
         def get_inducing_indices(y):

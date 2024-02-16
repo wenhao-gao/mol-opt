@@ -152,6 +152,9 @@ class Stoned(BaseOptimizer):
         self.model_name = "stoned"
 
     def _optimize(self, oracle, config):
+        ## set default value 
+        if 'generation_size' not in config:
+            config['generation_size']=500
 
         self.oracle.assign_evaluator(oracle)
 

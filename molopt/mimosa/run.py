@@ -16,6 +16,17 @@ class MIMOSA(BaseOptimizer):
 		self.model_name = "mimosa"
 
 	def _optimize(self, oracle, config):
+		#### set the default value 
+		if 'population_size' not in config:
+			config['population_size'] = 50
+		if 'offspring_size' not in config:
+			config['offspring_size'] = 500
+		if 'lamb' not in config:
+			config['lamb'] = 0.1
+		if 'train_epoch' not in config:
+			config['train_epoch'] = 3
+		if 'train_data_size' not in config:
+			config['train_data_size'] = 800
 
 		self.oracle.assign_evaluator(oracle)
 		all_smiles_score_list = []  

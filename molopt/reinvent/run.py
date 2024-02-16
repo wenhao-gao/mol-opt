@@ -19,6 +19,15 @@ class REINVENT(BaseOptimizer):
         self.model_name = "reinvent"
 
     def _optimize(self, oracle, config):
+        ## set default value 
+        if 'learning_rate' not in config:
+            config['learning_rate'] = 0.0005
+        if 'batch_size' not in config:
+            config['batch_size'] = 64
+        if 'sigma' not in config:
+            config['sigma'] = 500
+        if 'experience_replay' not in config:
+            config['experience_replay'] = 24
 
         self.oracle.assign_evaluator(oracle)
 
