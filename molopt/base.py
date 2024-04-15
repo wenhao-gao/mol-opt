@@ -192,6 +192,14 @@ class Oracle:
     def finish(self):
         return len(self.mol_buffer) >= self.max_oracle_calls
 
+class TempOracle:
+    def __init__(self, func=None) -> None:
+        self.func = func
+        self.name = func.__name__
+
+    def __call__(self, *args, **kwds):
+        return self.func(*args, **kwds)
+
 
 class BaseOptimizer:
 
@@ -310,8 +318,12 @@ class BaseOptimizer:
     def optimize(self, oracle, config = None, patience=5, seed=0, project="test", **kwargs):
         if type(oracle)==str:
             oracle = tdc.Oracle(oracle)
+        elif callable(oracle):
+            oracle = TempOracle(oracle)
         # assert type(oracle) == tdc.Oracle
         assert callable(oracle) 
+
+        # import ipdb; ipdb.set_trace()
 
         if config is not None:
             config = yaml.safe_load(open(config)) 
