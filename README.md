@@ -12,15 +12,33 @@ Please note, our package has been tested and confirmed to work with Python 3.8. 
 
 ## 💻 Usage (3 lines of code)
 
+Oracle can be a `string` refering to a [TDC oracle](https://tdcommons.ai/functions/oracles/), e.g., `qed`, `jnk3`, `gsk3b`: 
+
 ```python
 from molopt.graph_ga import GraphGA
 optimizer = GraphGA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
-optimizer.optimize(oracle='qed', config='path_to_your_hparams.yaml', patience=5, seed=0)
+optimizer.optimize(oracle='qed', patience=5, seed=0)
 ```
 
-Oracle can be a `string` (e.g., `qed`, `jnk3`, `gsk3b`) or a callable function (e.g., `qed=tdc.Oracle('qed')`). 
+or a callable function that takes a smiles string as input and return a real value: 
 
-We support three hyperparameter tune strategies:
+```python
+from molopt.graph_ga import GraphGA
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+optimizer = GraphGA(smi_file=None, n_jobs=-1, max_oracle_calls=10000, freq_log=100, output_dir = 'results', log_results=True) 
+
+def mol_wt(smi):
+    m = Chem.MolFromSmiles(smi)
+    if m is None:
+        return 0
+    else:
+        return Descriptors.MolWt(m)
+
+optimizer.optimize(oracle=mol_wt, patience=5, seed=0)
+```
+
+Note that all methods are by default desigend to maximize the oracle function. We support three hyperparameter tune strategies:
 - default: e.g., `optimizer.optimize(oracle='qed', patience=5, seed=0)`. 
 - configuration file: e.g., for graph GA, `optimizer.optimize(oracle='qed', config='molopt/graph_ga/hparams_default.yaml', patience=5, seed=0)`. 
 - keyword update: e.g., for graph GA, `optimizer.optimize(oracle='qed', patience=5, seed=0, population_size=120)`. 
